@@ -320,6 +320,18 @@ export default class BlockManager extends Module {
     return block;
   }
 
+  public inlinetoolevent(
+    toolName: string,
+    _pasteEvent: CustomEvent
+  ): Block {
+    const block = this.insert({
+      tool: toolName,
+      data: 'aaa', //pasteEvent,
+    });
+
+    return block;
+  }
+
   /**
    * Insert new initial block at passed index
    *
@@ -673,13 +685,16 @@ export default class BlockManager extends Module {
    * @param {Block} block - Block to which event should be bound
    */
   private bindEvents(block: Block): void {
-    const { BlockEvents, Listeners } = this.Editor;
+    const { BlockEvents, Listeners, Events } = this.Editor;
 
     Listeners.on(block.holder, 'keydown', (event) => BlockEvents.keydown(event as KeyboardEvent), false);
     Listeners.on(block.holder, 'mousedown', (event: MouseEvent) => BlockEvents.mouseDown(event));
     Listeners.on(block.holder, 'keyup', (event) => BlockEvents.keyup(event));
     Listeners.on(block.holder, 'dragover', (event) => BlockEvents.dragOver(event as DragEvent));
     Listeners.on(block.holder, 'dragleave', (event) => BlockEvents.dragLeave(event as DragEvent));
+    Listeners.on(block.holder, 'inlineTool', (event) => BlockEvents.inlineToolEmit(event as DragEvent));
+
+    //Events.on('inlineTool', BlockEvents.inlineToolEmit.bind(this.Editor));
   }
 
   /**

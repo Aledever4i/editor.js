@@ -81,7 +81,7 @@ export default class Core {
         _.logLabeled('I\'m ready! (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧', 'log', '', 'color: #E24A75');
 
         setTimeout(async () => {
-          await this.render();
+          await this.moduleInstances.Renderer.render(this.config.data.blocks); // this.render();
 
           if ((this.configuration as EditorConfig).autofocus) {
             const { BlockManager, Caret } = this.moduleInstances;

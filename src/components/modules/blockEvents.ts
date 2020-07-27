@@ -561,4 +561,36 @@ export default class BlockEvents extends Module {
       this.Editor.BlockSettings.open();
     }
   }
+
+  public inlineToolEmit(event: CustomEvent): void {
+    const { BlockManager, Tools, UI } = ((this as any).API.Editor);
+    const editor = ((this as any).API.Editor);
+    const currentBlock = BlockManager.currentBlock;
+    const tool = Tools.available[currentBlock.name];
+
+    if (UI.someToolbarOpened && UI.someFlipperButtonFocused) {
+      return;
+    }
+
+    let newCurrent = editor.BlockManager.currentBlock;
+
+    if (editor.Caret.isAtStart && !editor.BlockManager.currentBlock.hasMedia) {
+      editor.BlockManager.insertInitialBlockAtIndex(editor.BlockManager.currentBlockIndex);
+    } else {
+      newCurrent = editor.BlockManager.split();
+    }
+
+    editor.Caret.setToBlock(newCurrent);
+
+    if (editor.Tools.isInitial(newCurrent.tool) && newCurrent.isEmpty) {
+      editor.Toolbar.open(false);
+      editor.Toolbar.plusButton.show();
+    }
+
+    event.preventDefault();
+  }
+
+
+  public uninlineToolEmit(event: CustomEvent): void {
+  }
 }

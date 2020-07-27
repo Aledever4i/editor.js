@@ -293,6 +293,7 @@ export default class Paste extends Module {
       this.getTagsConfig(name, toolPasteConfig);
       this.getFilesConfig(name, toolPasteConfig);
       this.getPatternsConfig(name, toolPasteConfig);
+      this.ToolSubscribe(name, toolPasteConfig);
     } catch (e) {
       _.log(
         `Paste handling for «${name}» Tool hasn't been set up because of the error`,
@@ -300,6 +301,10 @@ export default class Paste extends Module {
         e
       );
     }
+  }
+
+  private ToolSubscribe(name: string, toolPasteConfig: PasteConfig): void {
+
   }
 
   /**

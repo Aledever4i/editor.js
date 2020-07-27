@@ -76,6 +76,7 @@ export enum BlockToolAPI {
   UPDATED = 'updated',
   REMOVED = 'removed',
   ON_PASTE = 'onPaste',
+  inlinetoolevent = 'inlinetoolevent'
 }
 
 /**
@@ -224,6 +225,7 @@ export default class Block {
     });
 
     this.holder = this.compose();
+
     /**
      * @type {BlockTune[]}
      */

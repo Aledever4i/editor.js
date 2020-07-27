@@ -661,6 +661,13 @@ export default class InlineToolbar extends Module {
     this.checkToolsState();
   }
 
+  private toolEmit(tool: InlineTool): void {
+    const range = SelectionUtils.range;
+
+    tool.emit(range);
+    this.checkToolsState();
+  }
+
   /**
    * Check Tools` state by selection
    */

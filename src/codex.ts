@@ -27,7 +27,7 @@ export default class EditorJS {
   /**
    * Promise that resolves when core modules are ready and UI is rendered on the page
    */
-  public isReady: Promise<void>;
+  public isReady: Promise<boolean>;
 
   /**
    * Stores destroy method implementation.
@@ -68,10 +68,14 @@ export default class EditorJS {
      *
      * @type {Promise<void>}
      */
-    this.isReady = editor.isReady.then(() => {
-      this.exportAPI(editor);
-      onReady();
-    });
+
+    this.isReady = new Promise((res, _rej) => {
+      editor.isReady.then(() => {
+          this.exportAPI(editor);
+          onReady();
+          res(true);
+        })
+      });
   }
 
   /**
