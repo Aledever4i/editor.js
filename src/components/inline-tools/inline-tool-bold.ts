@@ -98,4 +98,10 @@ export default class BoldInlineTool implements InlineTool {
   public get shortcut(): string {
     return 'CMD+B';
   }
+
+  renderHtml(data: any): HTMLElement {
+    let element = document.createElement('b');
+    element.innerHTML = data.data;
+    return element;
+  }
 }

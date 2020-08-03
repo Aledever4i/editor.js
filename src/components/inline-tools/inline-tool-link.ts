@@ -253,4 +253,10 @@ export default class LinkInlineTool implements InlineTool {
   //  this.events.emit('unlink', { type: 'link', value: '' });
   //  //document.execCommand(this.commandUnlink);
   //}
+
+  renderHtml(data: any): HTMLElement {
+    let element = document.createElement('a');
+    element.innerHTML = data.data;
+    return element;
+  }
 }

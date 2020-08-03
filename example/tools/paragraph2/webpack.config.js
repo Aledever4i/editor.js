@@ -1,18 +1,20 @@
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.ts',
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
+        test: /\.ts$/,
         use: [
           {
             loader: 'babel-loader',
-            query: {
-              presets: [ '@babel/preset-env' ],
+            options: {
+              cacheDirectory: true,
             },
           },
-        ]
+          {
+            loader: 'ts-loader',
+          },
+        ],
       },
       {
         test: /\.css$/,

@@ -217,7 +217,7 @@ export default class Block {
 
     this.mutationObserver = new MutationObserver(this.didMutated);
 
-    this.tool = new Tool({
+    this.tool = new (Tool as any).default({
       data,
       config: this.config,
       api: this.api.getMethodsForTool(name, ToolType.Block),

@@ -692,8 +692,8 @@ export default class BlockManager extends Module {
     Listeners.on(block.holder, 'keyup', (event) => BlockEvents.keyup(event));
     Listeners.on(block.holder, 'dragover', (event) => BlockEvents.dragOver(event as DragEvent));
     Listeners.on(block.holder, 'dragleave', (event) => BlockEvents.dragLeave(event as DragEvent));
-    Listeners.on(block.holder, 'inlineTool', (event) => BlockEvents.inlineToolEmit(event as DragEvent));
 
+    //Listeners.on(block.holder, 'inlineTool', (event) => BlockEvents.inlineToolEmit(event as DragEvent));
     //Events.on('inlineTool', BlockEvents.inlineToolEmit.bind(this.Editor));
   }
 

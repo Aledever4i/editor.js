@@ -94,4 +94,10 @@ export default class ItalicInlineTool implements InlineTool {
   public get shortcut(): string {
     return 'CMD+I';
   }
+
+  renderHtml(data: any): HTMLElement {
+    let element = document.createElement('i');
+    element.innerHTML = data.data;
+    return element;
+  }
 }

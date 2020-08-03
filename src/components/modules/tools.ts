@@ -63,11 +63,7 @@ export default class Tools extends Module {
    *
    * @returns {object} - object of Inline Tool's classes
    */
-  public get inline(): {[name: string]: ToolConstructable} {
-    if (this._inlineTools) {
-      return this._inlineTools;
-    }
-
+  private inlineInit() {
     const tools = Object.entries(this.available).filter(([name, tool]) => {
       if (!tool[this.INTERNAL_SETTINGS.IS_INLINE]) {
         return false;
@@ -96,17 +92,36 @@ export default class Tools extends Module {
      * collected inline tools with key of tool name
      */
     const result = {};
-
     tools.forEach(([name, tool]) => {
       result[name] = tool;
+    });
+
+    const result2 = {};
+    tools.forEach(([name, tool]) => {
+      result2[name] = this.constructInline(tool, name);
     });
 
     /**
      * Cache prepared Tools
      */
     this._inlineTools = result;
+    this._inlineToolsInstances = result2;
+  } 
+
+  public get inline(): {[name: string]: ToolConstructable} {
+    if (!this._inlineTools) {
+      this.inlineInit();
+    }
 
     return this._inlineTools;
+  }
+
+  public getInlineRenderHtml(name: string): Function {
+    if (!this._inlineTools) {
+      this.inlineInit();
+    }
+
+    return (this._inlineToolsInstances[name]).renderHtml;
   }
 
   /**
@@ -191,7 +206,8 @@ export default class Tools extends Module {
    * @type {null|object}
    * @private
    */
-  private _inlineTools: {[name: string]: ToolConstructable} = {};
+  private _inlineTools: { [name: string]: ToolConstructable } = {};
+  private _inlineToolsInstances: { [name: string]: InlineTool } = {};
 
   /**
    * @class
@@ -222,6 +238,7 @@ export default class Tools extends Module {
     this.toolsUnavailable = {};
 
     this._inlineTools = null;
+    this._inlineToolsInstances = null;
   }
 
   /**

@@ -33,6 +33,8 @@ export interface InlineTool extends BaseTool {
    * Function called with Inline Toolbar closing
    */
   clear?(): void;
+
+  renderHtml(data: any): HTMLElement;
 }
 
 
