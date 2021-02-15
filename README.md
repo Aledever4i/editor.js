@@ -4,8 +4,8 @@
 [![](https://flat.badgen.net/bundlephobia/min/@editorjs/editorjs?color=cyan)](https://www.npmjs.com/package/@editorjs/editorjs)
 [![](https://flat.badgen.net/bundlephobia/minzip/@editorjs/editorjs?color=green)](https://www.npmjs.com/package/@editorjs/editorjs)
 [![Backers on Open Collective](https://opencollective.com/editorjs/backers/badge.svg)](#backers)
-[![Sponsors on Open Collective](https://opencollective.com/editorjs/sponsors/badge.svg)](#sponsors) 
-[![](https://flat.badgen.net/npm/license/@editorjs/editorjs)](https://www.npmjs.com/package/@editorjs/editorjs)
+[![Sponsors on Open Collective](https://opencollective.com/editorjs/sponsors/badge.svg)](#sponsors)
+[![](https://img.shields.io/npm/l/@editorjs/editorjs?style=flat-square)](https://www.npmjs.com/package/@editorjs/editorjs)
 [![Join the chat at https://gitter.im/codex-team/editor.js](https://badges.gitter.im/codex-team/editor.js.svg)](https://gitter.im/codex-team/editor.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari-ios/safari-ios_48x48.png" alt="iOS Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>iOS Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
@@ -17,24 +17,24 @@
 If you like Editor.js you can support project improvements and development of new features with a donation to our collective.
 
  👉  [https://opencollective.com/editorjs](https://opencollective.com/editorjs)
- 
+
 ### Sponsors
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/editorjs#sponsor)]
 
 <a href="https://opencollective.com/editorjs/sponsor/0/website" target="_blank"><img src="https://opencollective.com/editorjs/sponsor/0/avatar.svg"></a>
- 
+
  ### Backers
- 
+
  Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/editorjs#backer)]
- 
+
  <a href="https://opencollective.com/editorjs#backers" target="_blank"><img src="https://opencollective.com/editorjs/backers.svg?width=890"></a>
- 
+
 ### Contributors
 
 This project exists thanks to all the people who contribute. <img src="https://opencollective.com/editorjs/contributors.svg?width=890&button=false" />
 
-We really welcome new contributors. If you want to make some code with us, please take a look at the [Good First Tasks](https://github.com/codex-team/editor.js/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+task%22). You can write to us on `team@codex.so` or via special [Telegram chat](https://t.me/editorjsdev), or any other way. 
+We really welcome new contributors. If you want to make some code with us, please take a look at the [Good First Tasks](https://github.com/codex-team/editor.js/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+task%22). You can write to us on `team@codex.so` or via special [Telegram chat](https://t.me/editorjsdev), or any other way.
 
 ## Documentation
 
@@ -142,7 +142,7 @@ npm i @editorjs/editorjs
 Include module in your application
 
 ```javascript
-const EditorJS = require('@editorjs/editorjs');
+import EditorJS from '@editorjs/editorjs';
 ```
 
 ##### Option B. Use a CDN
@@ -240,11 +240,11 @@ Take a look at the [example.html](example/example.html) to view more detailed ex
 
 ## Credits and references
 
-- We use [HTMLJanitor](https://github.com/guardian/html-janitor) module in our Sanitizer module. 
+- We use [HTMLJanitor](https://github.com/guardian/html-janitor) module in our Sanitizer module.
 
 ## About team
 
-We are CodeX and we build products for developers and makers. 
+We are CodeX and we build products for developers and makers.
 
 Follow us on Twitter: [twitter.com/codex_team](https://twitter.com/codex_team)
 

@@ -174,6 +174,128 @@ export const log = _log.bind(window, false);
 export const logLabeled = _log.bind(window, true);
 
 /**
+ * Return string representation of the object type
+ *
+ * @param {*} object - object to get type
+ *
+ * @returns {string}
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function typeOf(object: any): string {
+  return Object.prototype.toString.call(object).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
+}
+
+/**
+ * Check if passed variable is a function
+ *
+ * @param {*} fn - function to check
+ *
+ * @returns {boolean}
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isFunction(fn: any): fn is Function {
+  return typeOf(fn) === 'function';
+}
+
+/**
+ * Checks if passed argument is an object
+ *
+ * @param {*} v - object to check
+ *
+ * @returns {boolean}
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isObject(v: any): v is object {
+  return typeOf(v) === 'object';
+}
+
+/**
+ * Checks if passed argument is a string
+ *
+ * @param {*} v - variable to check
+ *
+ * @returns {boolean}
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isString(v: any): v is string {
+  return typeOf(v) === 'string';
+}
+
+/**
+ * Checks if passed argument is boolean
+ *
+ * @param {*} v - variable to check
+ *
+ * @returns {boolean}
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isBoolean(v: any): v is boolean {
+  return typeOf(v) === 'boolean';
+}
+
+/**
+ * Checks if passed argument is number
+ *
+ * @param {*} v - variable to check
+ *
+ * @returns {boolean}
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isNumber(v: any): v is number {
+  return typeOf(v) === 'number';
+}
+
+/**
+ * Checks if passed argument is undefined
+ *
+ * @param {*} v - variable to check
+ *
+ * @returns {boolean}
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isUndefined(v: any): v is undefined {
+  return typeOf(v) === 'undefined';
+}
+
+/**
+ * Check if passed function is a class
+ *
+ * @param {Function} fn - function to check
+ *
+ * @returns {boolean}
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isClass(fn: any): boolean {
+  return isFunction(fn) && /^\s*class\s+/.test(fn.toString());
+}
+
+/**
+ * Checks if object is empty
+ *
+ * @param {object} object - object to check
+ *
+ * @returns {boolean}
+ */
+export function isEmpty(object: object): boolean {
+  if (!object) {
+    return true;
+  }
+
+  return Object.keys(object).length === 0 && object.constructor === Object;
+}
+
+/**
+ * Check if passed object is a Promise
+ *
+ * @param  {*}  object - object to check
+ * @returns {boolean}
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isPromise(object: any): object is Promise<any> {
+  return Promise.resolve(object) === object;
+}
+
+/**
  * Returns true if passed key code is printable (a-Z, 0-9, etc) character.
  *
  * @param {number} keyCode - key code
@@ -183,6 +305,7 @@ export const logLabeled = _log.bind(window, true);
 export function isPrintableKey(keyCode: number): boolean {
   return (keyCode > 47 && keyCode < 58) || // number keys
     keyCode === 32 || keyCode === 13 || // Spacebar & return key(s)
+    keyCode === 229 || // processing key input for certain languages — Chinese, Japanese, etc.
     (keyCode > 64 && keyCode < 91) || // letter keys
     (keyCode > 95 && keyCode < 112) || // Numpad keys
     (keyCode > 185 && keyCode < 193) || // ;=,-./` (in order)
@@ -222,9 +345,9 @@ export async function sequence(
   ): Promise<void> {
     try {
       await chainData.function(chainData.data);
-      await successCallback(typeof chainData.data !== 'undefined' ? chainData.data : {});
+      await successCallback(!isUndefined(chainData.data) ? chainData.data : {});
     } catch (e) {
-      fallbackCallback(typeof chainData.data !== 'undefined' ? chainData.data : {});
+      fallbackCallback(!isUndefined(chainData.data) ? chainData.data : {});
     }
   }
 
@@ -252,56 +375,6 @@ export async function sequence(
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function array(collection: ArrayLike<any>): any[] {
   return Array.prototype.slice.call(collection);
-}
-
-/**
- * Check if passed variable is a function
- *
- * @param {*} fn - function to check
- *
- * @returns {boolean}
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function isFunction(fn: any): fn is Function {
-  return typeof fn === 'function';
-}
-
-/**
- * Check if passed function is a class
- *
- * @param {Function} fn - function to check
- *
- * @returns {boolean}
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function isClass(fn: any): boolean {
-  return typeof fn === 'function' && /^\s*class\s+/.test(fn.toString());
-}
-
-/**
- * Checks if object is empty
- *
- * @param {object} object - object to check
- *
- * @returns {boolean}
- */
-export function isEmpty(object: object): boolean {
-  if (!object) {
-    return true;
-  }
-
-  return Object.keys(object).length === 0 && object.constructor === Object;
-}
-
-/**
- * Check if passed object is a Promise
- *
- * @param  {*}  object - object to check
- * @returns {boolean}
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function isPromise(object: any): object is Promise<any> {
-  return Promise.resolve(object) === object;
 }
 
 /**
@@ -440,18 +513,6 @@ export function capitalize(text: string): string {
 }
 
 /**
- * Return string representation of the object type
- *
- * @param {*} object - object to get type
- *
- * @returns {string}
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function typeOf(object: any): string {
-  return Object.prototype.toString.call(object).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
-}
-
-/**
  * Merge to objects recursively
  *
  * @param {object} target - merge target
@@ -459,8 +520,6 @@ export function typeOf(object: any): string {
  * @returns {object}
  */
 export function deepMerge<T extends object>(target, ...sources): T {
-  const isObject = (item): item is object => item && typeOf(item) === 'object';
-
   if (!sources.length) {
     return target;
   }
@@ -555,4 +614,31 @@ export function getValidUrl(url: string): string {
  */
 export function openTab(url: string): void {
   window.open(url, '_blank');
+}
+
+/**
+ * Returns random generated identifier
+ *
+ * @param {string} prefix - identifier prefix
+ *
+ * @returns {string}
+ */
+export function generateId(prefix = ''): string {
+  // tslint:disable-next-line:no-bitwise
+  return `${prefix}${(Math.floor(Math.random() * 1e8)).toString(16)}`;
+}
+
+/**
+ * Common method for printing a warning about the usage of deprecated property or method.
+ *
+ * @param condition - condition for deprecation.
+ * @param oldProperty - deprecated property.
+ * @param newProperty - the property that should be used instead.
+ */
+export function deprecationAssert(condition: boolean, oldProperty: string, newProperty: string): void {
+  const message = `«${oldProperty}» is deprecated and will be removed in the next major release. Please use the «${newProperty}» instead.`;
+
+  if (condition) {
+    logLabeled(message, 'warn');
+  }
 }

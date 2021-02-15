@@ -49,7 +49,7 @@ export default class Shortcuts extends Module {
   public add(shortcut: ShortcutData): void {
     const newShortcut = new Shortcut({
       name: shortcut.name,
-      on: document, // UI.nodes.redactor
+      on: this.Editor.UI.nodes.redactor,
       callback: shortcut.handler,
     });
 
@@ -63,6 +63,10 @@ export default class Shortcuts extends Module {
    */
   public remove(shortcut: string): void {
     const index = this.registeredShortcuts.findIndex((shc) => shc.name === shortcut);
+
+    if (index === -1 || !this.registeredShortcuts[index]) {
+      return;
+    }
 
     this.registeredShortcuts[index].remove();
     this.registeredShortcuts.splice(index, 1);
